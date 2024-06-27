@@ -3,9 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const todoSlice=createSlice({
     name:'todos',
     initialState:{
-        tasks:[],
-        inProgress:[],
-        completed:[],
+        tasks:[{id:1,content:'hello'},],
+        inProgress:[{id:10,content:'hello'},],
+        completed:[{id:100,content:'hello'},],
     },
     reducers:{
         addTodo:(state,action)=>{

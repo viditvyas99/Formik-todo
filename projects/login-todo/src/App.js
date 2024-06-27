@@ -1,11 +1,13 @@
 
 import './App.css';
-import Login from './component/Login';
+import Todos from './component/Todos';
+// import Login from './component/Login';
 
 function App() {
   return (
     <div >
-      <Login/>
+      {/* <Login/> */}
+      <Todos/>
     </div>
   );
 }

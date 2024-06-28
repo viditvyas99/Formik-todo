@@ -11,9 +11,8 @@ function Login() {
         username:Yup.string().required('required'),
         password:Yup.string().min(6,'password must be al least 6 characters').required('required')
     })
-    const handleSubmit =(values,{setSubmitting})=>{
+    const handleSubmit =(values)=>{
         dispatch(login(values))
-        // setSubmitting(false)
 
     }
   return (
@@ -39,7 +38,6 @@ function Login() {
                 </div>
             </Form>
         )}
-
         </Formik>
 
       

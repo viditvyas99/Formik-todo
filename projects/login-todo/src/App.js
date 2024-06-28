@@ -7,14 +7,15 @@ import Login from './component/Login';
 import { useSelector } from 'react-redux';
 
 function App() {
-  const user = useSelector((state)=>state.auth)
+  const user = useSelector((state)=>state.auth.user)
+  console.log(user)
   return (
     <div >
 
 {user? 
-<Login/>
-:
 <Todosdemo/>
+:
+<Login/>  
 }
     </div>
   )

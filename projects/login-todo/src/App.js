@@ -2,15 +2,22 @@
 import './App.css';
 // import Todos from './component/Todos';
 import Todosdemo from './component/Todosdemo';
-// import Login from './component/Login';
+import Login from './component/Login';
+
+import { useSelector } from 'react-redux';
 
 function App() {
+  const user = useSelector((state)=>state.auth)
   return (
     <div >
-      {/* <Login/> */}
-      <Todosdemo></Todosdemo>
+
+{user? 
+<Login/>
+:
+<Todosdemo/>
+}
     </div>
-  );
+  )
 }
 
 export default App;

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addTodo, moveTodo, removeTodo, reorderTodos } from '../features/todo/todoSlice';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import Logout from './Logout';
 
 export default function Todos() {
   const columns = {
@@ -13,6 +14,8 @@ export default function Todos() {
   const [input, setInput] = useState('');
   const todos = useSelector((state) => state.todos);
   const dispatch = useDispatch();
+  const user = useSelector((state)=>state.auth)
+  console.log(user)
 
   const handleAddTodo = () => {
     if (input) {
@@ -103,6 +106,7 @@ export default function Todos() {
           ))}
         </div>
       </DragDropContext>
+      <Logout/>
     </div>
   );
 }

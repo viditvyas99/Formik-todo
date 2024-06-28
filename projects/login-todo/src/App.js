@@ -1,13 +1,14 @@
 
 import './App.css';
-import Todos from './component/Todos';
+// import Todos from './component/Todos';
+import Todosdemo from './component/Todosdemo';
 // import Login from './component/Login';
 
 function App() {
   return (
     <div >
       {/* <Login/> */}
-      <Todos/>
+      <Todosdemo></Todosdemo>
     </div>
   );
 }

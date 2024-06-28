@@ -47,6 +47,7 @@ export default function Todos() {
             dispatch(reoderTodos({column:source.droppableId,reorderItems}))
         }
         else{
+            console.log(source.droppableId,destination.droppableId)
             const movedItem=todos[source.droppableId].find(item=>item.id===draggableId)
             dispatch(moveTodo({
                 source:source.droppableId,
@@ -54,7 +55,6 @@ export default function Todos() {
                 item:movedItem
             })
         )
-        console.log(movedItem,source.droppableId,destination.droppableId)
         }
     }
   return (
@@ -66,7 +66,7 @@ export default function Todos() {
     </div>
       <DragDropContext onDragEnd={handleOnDragEnd}>
         <div style={{display:'flex',justifyContent:'space-between'}}>
-            {Object.entries(columns).map((columnKey,index)=>(<Droppable key={index} droppableId={columnKey.toString()}>
+            {Object.entries(columns).map((columnKey,index)=>(<Droppable key={index} droppableId={columnKey[0].toString()}>
                 {/* {console.log(columnKey,index)} */}
                 {(Provided)=>(
                     <div ref={Provided.innerRef}

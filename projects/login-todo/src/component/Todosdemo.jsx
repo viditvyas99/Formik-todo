@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addTodo, moveTodo, removeTodo, reorderTodos } from '../features/todo/todoSlice';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import Logout from './Logout';
+import { Bar, BarChart, CartesianGrid, Legend, Pie, PieChart, Tooltip, XAxis, YAxis } from 'recharts';
 
 export default function Todos() {
   const columns = {
@@ -14,8 +15,7 @@ export default function Todos() {
   const [input, setInput] = useState('');
   const todos = useSelector((state) => state.todos);
   const dispatch = useDispatch();
-  const user = useSelector((state)=>state.auth)
-  console.log(user)
+  
 
   const handleAddTodo = () => {
     if (input) {
@@ -27,6 +27,7 @@ export default function Todos() {
     }
   };
 
+  
   const handleRemoveTodo = (id, column) => {
     dispatch(removeTodo({ id, column }));
   };
@@ -43,15 +44,27 @@ export default function Todos() {
 
       dispatch(reorderTodos({ column: source.droppableId, items: columnItems }));
     } else {
-      const movedItem = todos[source.droppableId].find(item => item.id === draggableId);
+      const movedItem = todos[source.droppableId].find(item => item.id === draggableId)
 
       dispatch(moveTodo({
         source: source.droppableId,
         destination: destination.droppableId,
         item: movedItem
-      }));
+      }))
     }
-  };
+  
+  }
+  const Count_data = [
+    {name:'Tasks',
+    count:todos.tasks.length,
+    fill:'red'},
+    {name:'In-Progress',
+    count:todos.inProgress.length,
+    fill:'blue'},
+    {name:'completed',
+    count:todos.completed.length,
+    fill:'green'}
+  ]
 
   return (
     <div>
@@ -106,6 +119,28 @@ export default function Todos() {
           ))}
         </div>
       </DragDropContext>
+      <div>
+      <BarChart
+      width={500}
+      height={400}
+      data={Count_data}
+      margin={{top:20, bottom:5 ,left:20,right:30}}
+      >
+        <CartesianGrid
+        strokeDasharray={'3 3'}/>
+        <XAxis dataKey="name"/>
+        <YAxis/>
+        <Tooltip/>
+        <Legend/>
+        <Bar dataKey='count'/>
+      </BarChart>
+      <PieChart  height={200}
+      width={500}>
+      <Pie data={Count_data} dataKey="count" nameKey='name' cx="50%" cy="50%" outerRadius={100} fill="#8884d8" />
+      <Tooltip />
+      {/* <Legend/> */}
+      </PieChart>
+      </div>
       <Logout/>
     </div>
   );
